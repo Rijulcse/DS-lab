@@ -1,73 +1,72 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-struct node
+typedef struct Node
 {
 int data;
-struct node *left;
-struct node *right;
-};
-typedef struct node *node;
-void insert(int data,node*root)
+struct Node *left;
+struct Node *right;
+}node;
+
+void insert( int data, node *root)
 {
-  struct node temp=(struct node)malloc(sizeof(struct node));
-  temp->left=temp->right=NULL;
-  temp->data=data;
-  node*prev;
-  node*cur=root;
-  while(cur!=NULL)
-  {
-  prev:cur;
-  if(cur->data>data)
-  cur=cur->left;
-  else
-  cur=cur->right;
-  }
-  if(prev->data>data)
-  prev->left=temp;
-  else
-  prev->right=temp;
-  }
-  int max(node*root)
-  {
-    if(root!=NULL)
-    {
-      node*cur=root;
-      while(cur->right!=NULL)
-      {
-        cur=cur->right;
-        }
-        return cur->data;
-        }
-        else
-        printf("Empty tree");
-        }
+node *temp=(node*)malloc(sizeof(struct Node));
+temp->left=temp->right=NULL;
+temp->data=data;
+node *prev;
+node *cur=root;
+while(cur!=NULL)
+{
+prev=cur;
+if(cur->data>data)
+cur=cur->left;
+else
+cur=cur->right;
+}
+if(prev->data>data)
+prev->left=temp;
+else
+prev->right=temp;
+}
+
+int max(node *root)
+{
+if(root!=NULL)
+{
+node *cur=root;
+while(cur->right!=NULL)
+{
+cur=cur->right;
+}
+return(cur->data);
+}
+else
+printf("Empty!/n");
+}
+
 void main()
 {
-  int ch,data;
-  while(1)
-  {
-    printf("1 for inserting,2 for finding max element in tree,0 to exit /n");
-    scanf("%d",&ch);
-    switch(ch)
-    {
-      case 1: printf("Enter the element ");
-      scanf("%d",&data);
-      node*root=NULL;
-      if(root=NULL)
-      {
-        root->left=root->right=NULL;
-        root->data=data;
-        }
-        else
-        insert(data,root);
-        break;
-
-      case 2:int max1=max(root);
-      printf("max element in the tree =%d",max1);
-      break;
-
-      default:exit();
-      }
-      }
-      }
+int ch,data,max1;
+while(1)
+{
+printf("1 for insert/n 2 for max /n 0 for exit");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1: printf("/n enter the element");
+	scanf("%d",&data);
+	node *root = NULL;
+	if(root==NULL)
+	{
+		root->left=root->right=NULL;
+		root->data=data;
+	}
+	else
+		insert(data,root);
+	break;
+case 2: max1=max(root);
+	printf("max element=%d",max1);
+	break;
+default:exit;
+}
+}
+}
